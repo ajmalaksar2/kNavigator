@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>kNavigator Files</title>
+  </head>
+  <body>
+    <h1>Available Files</h1>
+    <ul id="fileList"></ul>
+
+    <script>
+      fetch("https://api.github.com/repos/ajmalaksar2/kNavigator/contents/")
+        .then((response) => response.json())
+        .then((data) => {
+          const fileList = document.getElementById("fileList");
+          data.forEach((file) => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = file.download_url;
+            a.textContent = file.name;
+            li.appendChild(a);
+            fileList.appendChild(li);
+          });
+        })
+        .catch((error) => console.error(error));
+    </script>
+  </body>
+</html>
